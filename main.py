@@ -7,9 +7,9 @@ from TransmissionSimulator import TransmissionSimulator
 
 dvb_scrambler = ScramblerDVB()
 #v34_scrambler = ScramblerV34()
-simulator = TransmissionSimulator(15, 1024)
-#bits = FileUtils.read_file("piano_test_scrambler.mp3")
-bits = FileUtils.read_file("Nagranie.mp3")
+simulator = TransmissionSimulator(10, 1024)
+bits = FileUtils.read_file("piano_test_scrambler.mp3")
+#bits = FileUtils.read_file("Nagranie.mp3")
 print(len(bits))
 non_scrambled_transmission = simulator.execute_transmission(bits)
 print(len(non_scrambled_transmission))
