@@ -2,20 +2,23 @@ from ScramblerDVB import ScramblerDVB
 #from ScramblerV34 import ScramblerV34
 from fileUtil import FileUtils
 from errorsUtil import BERUtil
+from testUtil import testUtil
 from TransmissionSimulator import TransmissionSimulator
 
 dvb_scrambler = ScramblerDVB()
 #v34_scrambler = ScramblerV34()
 simulator = TransmissionSimulator(15, 1024)
-bits = FileUtils.read_file("piano_test_scrambler.mp3")
+#bits = FileUtils.read_file("piano_test_scrambler.mp3")
+bits = FileUtils.read_file("Nagranie.mp3")
 print(len(bits))
-
 non_scrambled_transmission = simulator.execute_transmission(bits)
 print(len(non_scrambled_transmission))
 
 dvb_scrambler.perform_dvb_scrambling(bits)
 scrambled_transmission_dvb = simulator.execute_transmission(dvb_scrambler.scrambledSignalDVB)
 print(len(scrambled_transmission_dvb))
+testUtil.count_same_sequences(scrambled_transmission_dvb)
+
 dvb_scrambler.perform_dvb_descrambling(scrambled_transmission_dvb)
 
 #v34_scrambler.perform_v34_scrambling(bits)
