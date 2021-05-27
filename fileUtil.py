@@ -1,4 +1,5 @@
 import numpy
+from xlwt import Workbook
 
 class FileUtils:
 
@@ -20,5 +21,24 @@ class FileUtils:
         for b in uint8:
             f.write(b)
         f.close()
+
+    @staticmethod
+    def save_to_excel(array_of_zero_sequences, array_of_one_sequences, x, y, w, p):
+        wb = Workbook()
+        sheet1 = wb.add_sheet('Sheet 1')
+        #(row, column)
+        i = 1
+
+        sheet1.write(1, 0, 0)
+        sheet1.write(2, 0, 1)
+        while i<70:
+            sheet1.write(1, i, array_of_zero_sequences[i])
+            sheet1.write(2, i, array_of_one_sequences[i])
+            sheet1.write(0, i, i)
+            i = i+1
+
+        z = '.xls'
+        wb.save("histogram_%s%s%s%s%s" % (x, y, w, p, z))
+
 
 

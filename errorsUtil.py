@@ -5,8 +5,8 @@ class BERUtil:
         for i in range(len(inputSignal)):
             if descrambledSignal[i] == inputSignal[i]:
                 good = good + 1
-        print("Success ratio = ", good, "/", len(inputSignal), ", which is equal to: ", good / len(inputSignal) * 100,
-              "%")
+        print("Success ratio = ", good, "/", len(inputSignal))
+        print(good / len(inputSignal) * 100,"%")
 
 class Errors:
     @staticmethod

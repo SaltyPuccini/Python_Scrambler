@@ -25,10 +25,9 @@ def scrambling_dvb(register, input, output):
     fifteenth = register[-1]
     fourteenth = register[-2]
 
-    # dwa xory - pierwszy to xor z piętnastego i czternastego miejsca w rejestrze, drugi z otrzymanego wyniku i inputu
     firstXOR = BinaryUtils.XOR(fifteenth, fourteenth)
     secondXOR = BinaryUtils.XOR(input, firstXOR)
-    # na początek rejestru idzie pierwszy xor, rejestr jest przesuwany
+
     BinaryUtils.shift_register_with_feedback(register, firstXOR)
-    # do outputu idzie wynik drugiego xora
+
     output.append(secondXOR)

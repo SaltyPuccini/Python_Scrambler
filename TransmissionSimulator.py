@@ -1,11 +1,12 @@
-from BinaryUtils import BinaryUtils
 import random
 import time
 
+from BinaryUtils import BinaryUtils
+
 
 class TransmissionSimulator:
-    def __init__(self, num_of_bits_to_desync, length_of_desync):
-        self.num_of_bits_to_desync = num_of_bits_to_desync
+    def __init__(self, num_of_same_bits_to_desync, length_of_desync):
+        self.num_of_same_bits_to_desync = num_of_same_bits_to_desync
         self.length_of_desync = length_of_desync
 
     def execute_transmission(self, bits):
@@ -22,7 +23,7 @@ class TransmissionSimulator:
         start_of_transmission = time.perf_counter()
         for b in bits:
 
-            if len(temp) == self.num_of_bits_to_desync and not is_desync:
+            if len(temp) == self.num_of_same_bits_to_desync and not is_desync:
                 temp = []
                 is_desync = True
                 number_of_desyncs = number_of_desyncs + 1
@@ -66,3 +67,17 @@ class TransmissionSimulator:
         time_in_sync = whole_time - time_in_desync
         quality = time_in_sync / whole_time
         return quality
+
+    def propability_desynch(self, bits, p):
+        changed_bits = []
+        i = 0
+        ile = 0
+        while i < len(bits):
+            random_number = random.randint(0, 99)
+            if random_number < p:
+                changed_bits.append(BinaryUtils.negate(bits[i]))
+                ile=ile+1
+            else:
+                changed_bits.append(bits[i])
+            i=i+1
+        return changed_bits
